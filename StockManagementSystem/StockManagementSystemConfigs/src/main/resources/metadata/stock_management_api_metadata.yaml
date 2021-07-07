@@ -1,0 +1,10 @@
+---
+key: "stock_management_api-1.0.0"
+name : "stock_management_api"
+displayName : "stock_management_api"
+description: "Sample API"
+version: "1.0.0"
+serviceUrl: "https://{MI_HOST}:{MI_PORT}/inventory"
+definitionType: "OAS3"
+securityType: "BASIC"
+mutualSSLEnabled: false

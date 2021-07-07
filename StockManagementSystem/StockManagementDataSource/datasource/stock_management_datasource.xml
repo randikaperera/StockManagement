@@ -1,0 +1,15 @@
+<datasource>
+    <name>stockManagementDatasource</name>
+    <description>This datasource is used to make the connection with stock management system</description>
+    <jndiConfig useDataSourceFactory="false">
+        <name>MysqlConJNDI1</name>
+    </jndiConfig>
+    <definition type="RDBMS">
+        <configuration>
+            <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+            <url>jdbc:mysql://localhost:3306/stock</url>
+            <username>root</username>
+            <password>Randika@1234</password>
+        </configuration>
+    </definition>
+</datasource>

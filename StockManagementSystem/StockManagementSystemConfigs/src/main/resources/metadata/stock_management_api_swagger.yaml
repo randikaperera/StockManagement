@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: stock_management_api
+  description: API Definition of stock_management_api
+  version: 1.0.0
+servers:
+- url: http://localhost:8290/inventory
+paths:
+  /stockUpdate:
+    post:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response
+  /stockSet:
+    post:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response
+  /stockList:
+    get:
+      responses:
+        default:
+          description: Default response
