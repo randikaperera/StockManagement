@@ -1,0 +1,48 @@
+<data name="stockManagementDataservice" serviceGroup="stockGroup" transports="http https" enableBatchRequests="true">
+  <description>This data service use for crud operations of stock management system.</description>
+  <config id="stockManagementDatasource">
+    <property name="carbon_datasource_name">stockManagementDatasource</property>
+  </config>
+  <resource method="POST" path="/stock/newProducts">
+    <description />
+    <call-query href="setNewStock" />
+  </resource>
+  <resource method="POST" path="/stock/existingProducts">
+    <description />
+    <call-query href="setExistingStock" />
+  </resource>
+  <resource method="GET" path="/productList">
+    <description>get stock by productId</description>
+    <call-query href="getStock">
+      <with-param name="productIds" query-param="productIds" />
+    </call-query>
+  </resource>
+  <operation name="getStock">
+    <call-query href="getStock">
+      <with-param name="productIds" query-param="productIds" />
+    </call-query>
+  </operation>
+  <query id="setExistingStock" useConfig="stockManagementDatasource">
+    <sql>UPDATE stock.products set quantity = :quantity WHERE productId = :productId AND location = :location;</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <param name="location" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+  </query>
+  <query id="setNewStock" useConfig="stockManagementDatasource">
+    <sql>insert into stock.products ('productId','productName','description','location','quantity') values (?,?,?,?,?)</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <param name="productName" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="location" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+  </query>
+  <query id="getStock" useConfig="stockManagementDatasource">
+    <sql>SELECT P.productId,P.productName,S.location,S.stockLevel FROM Product as P LEFT JOIN Stock as S ON P.productId = S.productId WHERE P.productId = :productIds</sql>
+    <param name="productIds" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <result element="Entries" rowName="Entry">
+      <element name="productId" column="productId" xsdType="integer" />
+      <element name="productName" column="productName" xsdType="string" />
+      <element name="location" column="location" xsdType="string" />
+      <element name="stockLevel" column="stockLevel" xsdType="integer" />
+    </result>
+  </query>
+</data>

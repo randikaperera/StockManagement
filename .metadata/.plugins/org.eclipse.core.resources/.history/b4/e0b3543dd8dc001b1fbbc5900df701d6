@@ -1,0 +1,9 @@
+<data name="stockManagementDataservice" serviceNamespace="" serviceGroup="" transports="http https">
+  <description />
+  <config id="stockDataSource">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:3306/stock</property>
+    <property name="username">root</property>
+    <property name="password">Randika@1234</property>
+  </config>
+</data>

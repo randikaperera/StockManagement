@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" onError="product_error_sequence" name="stock_set_sequence" />

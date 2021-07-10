@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_set_sequence" onError="stock_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <xslt key="conf:xslts/set_stock_xml_payload.xslt"/>
+    <log level="full"/>
+    <payloadFactory media-type="xml">
+        <format>
+            <p:setStock_batch_req xmlns:p="http://ws.wso2.org/dataservice">
+                <!--1 or more occurrences-->
+                <setStock xmlns="http://ws.wso2.org/dataservice">
+                    <!--Exactly 1 occurrence-->
+                    <productId xmlns:xs="http://ws.wso2.org/dataservice">?</productId>
+                    <!--Exactly 1 occurrence-->
+                    <productName xmlns:xs="http://ws.wso2.org/dataservice">?</productName>
+                    <!--Exactly 1 occurrence-->
+                    <location xmlns:xs="http://ws.wso2.org/dataservice">?</location>
+                    <!--Exactly 1 occurrence-->
+                    <quantity xmlns:xs="http://ws.wso2.org/dataservice">?</quantity>
+                </setStock>
+            </p:setStock_batch_req>
+        </format>
+        <args/>
+    </payloadFactory>
+    <property name="SOAPAction" scope="transport" type="STRING" value="urn:setStock"/>
+    <call>
+        <endpoint key="conf:endpoints/list_stock_dss_endpoint.xml"/>
+    </call>
+    <respond/>
+</sequence>

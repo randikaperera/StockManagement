@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="stock_file_Jms_listener_proxy" startOnLoad="true" transports="jms" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <log level="full"/>
+            <property name="SOAPAction" scope="transport" type="STRING" value="urn:updateStock"/>
+            <call>
+                <endpoint key="conf:endpoints/stock_dss_endpoint.xml"/>
+            </call>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+    <parameter name="transport.jms.Destination">TestQueue</parameter>
+    <parameter name="transport.jms.ConcurrentConsumers">1</parameter>
+    <parameter name="transport.jms.ContentType">
+        <rules>
+            <jmsProperty>contentType</jmsProperty>
+            <default>application/xml</default>
+        </rules>
+    </parameter>
+    <parameter name="transport.jms.SessionTransacted">false</parameter>
+    <parameter name="transport.jms.ConnectionFactory">myQueueConnectionFactory</parameter>
+    <parameter name="transport.jms.CacheLevel">consumer</parameter>
+    <parameter name="transport.jms.MaxConcurrentConsumers">1</parameter>
+</proxy>

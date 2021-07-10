@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="product_list_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <call-template target="logger_template">
+        <with-param name="logLevel" value="INFO"/>
+        <with-param name="logSequence" value="product_list_sequence"/>
+        <with-param name="logMessage" value="invoke product list sequence"/>
+    </call-template>
+    <filter regex="false" source="boolean($url:productIds)">
+        <then>
+            <call-template target="logger_template">
+                <with-param name="logLevel" value="INFO"/>
+                <with-param name="logSequence" value="product_list_sequence"/>
+                <with-param name="logMessage" value="No product id has provided. List all the products."/>
+            </call-template>
+            <payloadFactory media-type="json">
+                <format>
+                {
+                
+  "_getstock":""
+                }
+                </format>
+                <args/>
+            </payloadFactory>
+        </then>
+        <else>
+            <call-template target="logger_template">
+                <with-param name="logLevel" value="INFO"/>
+                <with-param name="logSequence" value="product_list_sequence"/>
+                <with-param name="logMessage" value="List all the products relavent to the product Ids "/>
+            </call-template>
+            <payloadFactory media-type="json">
+                <format>
+                    
+                {
+                
+  "_getstock_batch_req":"$1"
+                }
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$url:productIds"/>
+                </args>
+            </payloadFactory>
+        </else>
+    </filter>
+</sequence>

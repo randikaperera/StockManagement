@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_set_sequence" onError="stock_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <xslt key="conf:xslts/product_list_endpoint.xml"/>
+    <log level="full"/>
+</sequence>

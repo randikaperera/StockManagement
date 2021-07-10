@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="product_list_sequence" onError="product_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <call-template target="logger_template">
+        <with-param name="logLevel" value="INFO"/>
+        <with-param name="logSequence" value="product_list_sequence"/>
+        <with-param name="logMessage" value="invoke product list sequence"/>
+    </call-template>
+    <log level="custom">
+        <property expression="$url:productIds" name="uri.var.q1"/>
+    </log>
+    <filter regex="false" source="boolean($url:productIds)">
+        <then>
+            <call-template target="logger_template">
+                <with-param name="logLevel" value="INFO"/>
+                <with-param name="logSequence" value="product_list_sequence"/>
+                <with-param name="logMessage" value="No product id has provided. List all the products."/>
+            </call-template>
+            <payloadFactory media-type="json">
+                <format>
+                {
+                
+  "_productList":""
+                }
+                </format>
+                <args/>
+            </payloadFactory>
+        </then>
+        <else>
+            <call-template target="logger_template">
+                <with-param name="logLevel" value="INFO"/>
+                <with-param name="logSequence" value="product_list_sequence"/>
+                <with-param name="logMessage" value="List all the products relavent to the product Ids "/>
+            </call-template>
+            <payloadFactory media-type="json">
+                <format>
+                    
+                {
+                
+  "_productList_batch_req":
+  {
+        "productList": 
+            {
+              "productIds":"$1"
+            }
+        
+    }
+                }
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$url:productIds"/>
+                </args>
+            </payloadFactory>
+        </else>
+    </filter>
+    <log level="full"/>
+    <call>
+        <endpoint key="conf:endpoints/product_list_endpoint.xml"/>
+    </call>
+    <log level="full"/>
+    <respond/>
+</sequence>

@@ -1,0 +1,40 @@
+<data name="stockManagementDataservice" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>This data service use for crud operations of stock management system.</description>
+  <config id="stockDataSource">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:3306/stock</property>
+    <property name="username">root</property>
+    <property name="password">Randika@1234</property>
+  </config>
+  <resource method="POST" path="/stock">
+    <description />
+    <call-query href="setStock">
+      <with-param name="productId" query-param="productId" />
+      <with-param name="productName" query-param="productName" />
+      <with-param name="description" query-param="description" />
+      <with-param name="location" query-param="location" />
+      <with-param name="quantity" query-param="quantity" />
+    </call-query>
+  </resource>
+  <query id="setStock" useConfig="stockDataSource">
+    <sql>insert into 'stock'.'products' ('productId','productName','description','location','quantity') values (2,'dell monitor-14','storage',15)</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <param name="productName" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="description" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="location" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="quantityproductId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+  </query>
+  <query id="getStock" useConfig="stockDataSource">
+    <sql>select * from stock.products where productId={productId}</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <result>
+      <element name="productId" column="productId" xsdType="integer" requiredRoles="" />
+      <element name="productName" column="productName" xsdType="string" requiredRoles="" />
+    </result>
+  </query>
+  <resource method="GET" path="/stock">
+    <description>get stock by productId</description>
+    <call-query href="getStock">
+    </call-query>
+  </resource>
+</data>

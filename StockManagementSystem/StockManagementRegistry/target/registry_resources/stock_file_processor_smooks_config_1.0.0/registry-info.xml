@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+    <item>
+        <file>stock_file_processor_smooks_config.xml</file>
+        <path>/_system/config/smooks</path>
+        <mediaType>application/vnd+wso2.smooks</mediaType>
+        <properties/>
+    </item>
+</resources>

@@ -1,0 +1,54 @@
+<data name="stockManagementDataservice" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>This data service use for crud operations of stock management system.</description>
+  <config id="stockDataSource">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:3306/stock</property>
+    <property name="username">root</property>
+    <property name="password">Randika@1234</property>
+  </config>
+  <resource method="POST" path="/stock/newProducts">
+    <description />
+    <call-query href="setNewStock" />
+  </resource>
+  <resource method="POST" path="/stock/existingProducts">
+    <description />
+    <call-query href="setExistingStock" />
+  </resource>
+  <resource method="GET" path="/stock">
+    <description>get stock by productId</description>
+    <call-query href="getStock" />
+  </resource>
+  <query id="setExistingStock" useConfig="stockDataSource">
+    <sql>UPDATE stock.products set quantity = :quantity WHERE productId = :productId AND location = :location;</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <param name="location" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+  </query>
+  <query id="setNewStock" useConfig="stockDataSource">
+    <sql>insert into stock.products ('productId','productName','description','location','quantity') values (?,?,?,?,?)</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <param name="productName" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="description" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="location" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+  </query>
+  <query id="getStock" useConfig="stockDataSource">
+    <sql>select * from stock.products where productId=:productId</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <result outputType="json">{
+    "products": {
+        "product": [
+            {
+                "ProductID": "$productId",
+                "Name": "$productName",
+                "Description": "$description"
+                "Stock": {
+                    "Amount": "$customerName",
+                    "Location": "$contactLastName"                 
+                }
+            }
+        ]
+    }
+}</result>
+  </query>
+</data>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="stock_file_processor_proxy" startOnLoad="true" transports="vfs" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <log>
+                <property name="JK*********" value="INSIDE VFS******"/>
+            </log>
+            <property name="DISABLE_SMOOKS_RESULT_PAYLOAD" scope="default" type="STRING" value="true"/>
+            <smooks config-key="smook_config">
+                <input type="text"/>
+                <output type="xml"/>
+            </smooks>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+    <parameter name="transport.PollInterval">10</parameter>
+    <parameter name="transport.vfs.FileURI">file:///Users/randikaperera/Desktop/wso2/stockFiles/in</parameter>
+    <parameter name="transport.vfs.ContentType">text/plain</parameter>
+    <parameter name="transport.vfs.ActionAfterProcess">MOVE</parameter>
+    <parameter name="transport.vfs.MoveAfterFailure">file:///Users/randikaperera/Desktop/wso2/stockFiles/fail</parameter>
+    <parameter name="transport.vfs.ActionAfterFailure">MOVE</parameter>
+    <parameter name="transport.vfs.FileNamePattern">.*.txt</parameter>
+    <parameter name="transport.vfs.MoveAfterProcess">file:///Users/randikaperera/Desktop/wso2/stockFiles/processed</parameter>
+</proxy>

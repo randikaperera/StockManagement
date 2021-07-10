@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="product_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <call-template target="logger_template">
+        <with-param name="logLevel" value="INFO"/>
+        <with-param name="logSequence" value="product_error_sequence"/>
+        <with-param name="logMessage" value="invoke error sequence"/>
+    </call-template>
+</sequence>

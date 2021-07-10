@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="stockManagementAPI" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/stockManagementAPI.xml</file>
+    </artifact>
+    <artifact name="stockManagementAPI_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/stockManagementAPI_swagger.yaml</file>
+    </artifact>
+    <artifact name="stockManagementAPI_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/stockManagementAPI_metadata.yaml</file>
+    </artifact>
+    <artifact name="product_update_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/product_update_sequence.xml</file>
+    </artifact>
+    <artifact name="product_list_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/product_list_sequence.xml</file>
+    </artifact>
+    <artifact name="product_set_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/product_set_sequence.xml</file>
+    </artifact>
+    <artifact name="product_error_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/product_error_sequence.xml</file>
+    </artifact>
+    <artifact name="logger_template" groupId="com.example.template" version="1.0.0" type="synapse/sequenceTemplate" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/templates/logger_template.xml</file>
+    </artifact>
+    <artifact name="stock_set_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_set_sequence.xml</file>
+    </artifact>
+    <artifact name="stock_error_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_error_sequence.xml</file>
+    </artifact>
+    <artifact name="stock_list_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_list_sequence.xml</file>
+    </artifact>
+    <artifact name="stock_update_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_update_sequence.xml</file>
+    </artifact>
+</artifacts>

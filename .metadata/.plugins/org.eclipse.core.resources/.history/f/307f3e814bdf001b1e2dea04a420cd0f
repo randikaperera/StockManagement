@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="test" groupId="com.yenlo.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>test.xml</file>
+            <path>/_system/governance/endpoints</path>
+            <mediaType>application/vnd.wso2.esb.endpoint</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="productListEndpoint" groupId="com.yenlo.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>productListEndpoint.xml</file>
+            <path>/_system/config/endpoints</path>
+            <mediaType>application/vnd.wso2.esb.endpoint</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="set_stock_xml_payload" groupId="com.yenlo.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>set_stock_xml_payload.xslt</file>
+            <path>/_system/config/xslts</path>
+            <mediaType>application/xslt+xml</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="list_stock_endpoint" groupId="com.yenlo.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>list_stock_dss_endpoint.xml</file>
+            <path>/_system/governance/endpoints</path>
+            <mediaType>application/vnd.wso2.esb.endpoint</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+</artifacts>

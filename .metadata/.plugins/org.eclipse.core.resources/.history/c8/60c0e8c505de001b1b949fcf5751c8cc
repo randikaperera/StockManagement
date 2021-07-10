@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="product_list_sequence" onError="product_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <call-template target="logger_template">
+        <with-param name="logLevel" value="INFO"/>
+        <with-param name="logSequence" value="product_list_sequence"/>
+        <with-param name="logMessage" value="invoke product list sequence"/>
+    </call-template>
+    <log level="custom">
+        <property expression="$url:productIds" name="+++++++++uri.var.q1++++++++++"/>
+    </log>
+    <filter regex="false" source="boolean($url:productIds)">
+        <then>
+            <call-template description="Call logger" target="stock-managment.logger.template">
+                <with-param name="logMessage" value="Product Ids not provided. Get all the available stocks"/>
+                <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+                <with-param name="logBody" value="true"/>
+            </call-template>
+            <payloadFactory media-type="xml">
+                <format>
+                    <get:getStock xmlns:get="http://ws.wso2.org/dataservice/getStock"/>
+                </format>
+                <args/>
+            </payloadFactory>
+        </then>
+        <else>
+            <call-template description="Call logger" target="stock-managment.logger.template">
+                <with-param name="logMessage" value="Product Ids  provided. Get all the stocks of provided product ids"/>
+                <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+                <with-param name="logBody" value="true"/>
+            </call-template>
+            <payloadFactory media-type="xml">
+                <format>
+                    <get:getStock xmlns:get="http://ws.wso2.org/dataservice/getStock">
+                        <get:productIds>$1</get:productIds>
+                    </get:getStock>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$url:productids"/>
+                </args>
+            </payloadFactory>
+        </else>
+    </filter>
+    <log level="full"/>
+    <call>
+        <endpoint key="conf:endpoints/product_list_endpoint.xml"/>
+    </call>
+    <log level="full"/>
+    <respond/>
+</sequence>

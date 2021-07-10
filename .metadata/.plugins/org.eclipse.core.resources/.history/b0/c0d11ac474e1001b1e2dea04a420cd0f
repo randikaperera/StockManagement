@@ -1,0 +1,32 @@
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
+xmlns:csv="http://www.milyn.org/xsd/smooks/csv-1.1.xsd"
+xmlns:jms="http://www.milyn.org/xsd/smooks/jms-routing-1.2.xsd"
+xmlns:ftl="http://www.milyn.org/xsd/smooks/freemarker-1.1.xsd">
+
+<params>
+<param name="stream.filter.type">SAX</param>
+<param name="stream.filter.readerPoolSize">100</param>
+</params>
+
+<csv:reader fields="ProductID,Change,Location" separator="," quote="'" skipLines="0" />
+
+<resource-config selector="csv-record">
+<resource>org.milyn.delivery.DomModelCreator</resource>
+</resource-config>
+
+<ftl:freemarker applyOnElement="csv-record">
+<ftl:template>/repository/resources/smooks/csv_record_as_xml.ftl</ftl:template>
+<ftl:use>
+<ftl:bindTo id="csv_record_as_xml"/>
+</ftl:use>
+</ftl:freemarker>
+
+<jms:router routeOnElement="csv-record" beanId="csv_record_as_xml" destination="TestQueue">
+<jms:message>
+<!-- Need to use special FreeMarker variable ".vars" -->
+<jms:correlationIdPattern>${.vars["csv-record"].ProductID}</jms:correlationIdPattern>
+</jms:message>
+<jms:jndi properties="/repository/resources/smooks/activemq.sr.jndi.properties" />
+<jms:highWaterMark mark="10000000"/>
+</jms:router>
+</smooks-resource-list>

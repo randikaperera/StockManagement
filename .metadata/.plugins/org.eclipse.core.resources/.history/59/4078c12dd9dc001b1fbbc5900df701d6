@@ -1,0 +1,15 @@
+<data name="stockManagementDataservice" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>This data service use for crud operations of stock maanagement system.</description>
+  <config id="stockDataSource">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:3306/stock</property>
+    <property name="username">root</property>
+    <property name="password">Randika@1234</property>
+  </config>
+  <query id="setStock" useConfig="stockDataSource">
+    <sql>insert into 'stock'.'products' ('productId','productName','description','location','quantity') values (2,'dell monitor-14','storage',15)</sql>
+  </query>
+  <operation name="stock">
+    <call-query href="setStock" />
+  </operation>
+</data>

@@ -1,0 +1,53 @@
+<data name="stockManagementDataservice" serviceGroup="stockGroup" transports="http https" enableBatchRequests="true">
+  <description>This data service use for crud operations of stock management system.</description>
+  <config id="stockDataSource">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:3306/stock</property>
+    <property name="username">root</property>
+    <property name="password">Randika@1234</property>
+  </config>
+  <query id="setExistingStock" useConfig="stockDataSource">
+    <sql>UPDATE stock.products set quantity = :quantity WHERE productId = :productId AND location = :location;</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <param name="location" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+  </query>
+  <query id="setNewStock" useConfig="stockDataSource">
+    <sql>insert into stock.products ('productId','productName','description','location','quantity') values (?,?,?,?,?)</sql>
+    <param name="productId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <param name="productName" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="location" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <param name="quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+  </query>
+  <query id="getStock" useConfig="stockDataSource">
+    <sql>SELECT P.productId,P.productName,S.location,S.stockLevel FROM Product as P LEFT JOIN Stock as S ON P.productId = S.productId WHERE P.productId IN :productIds</sql>
+    <result outputType="json">
+    {
+    "products": {
+        "product": [
+            {
+                "ProductID": "$productId",
+                "Name": "$productName",
+                "Stock": {
+                    "Amount": "$stockLevel",
+                    "Location": "$location"                 
+                }
+            }
+        ]
+    }
+}
+</result>
+  </query>
+  <resource method="POST" path="/stock/newProducts">
+    <description />
+    <call-query href="setNewStock" />
+  </resource>
+  <resource method="POST" path="/stock/existingProducts">
+    <description />
+    <call-query href="setExistingStock" />
+  </resource>
+  <resource method="GET" path="/productList">
+    <description>get stock by productId</description>
+    <call-query href="getStock" />
+  </resource>
+</data>

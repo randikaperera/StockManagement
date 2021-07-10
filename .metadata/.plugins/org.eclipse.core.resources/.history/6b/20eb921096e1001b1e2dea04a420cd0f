@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/inventory" name="stock_management_api" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" url-mapping="/stockUpdater">
+        <inSequence>
+            <sequence key="stock_update_sequence"/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" url-mapping="/stockSetter">
+        <inSequence>
+            <sequence key="stock_set_sequence"/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/stockLister">
+        <inSequence>
+            <sequence key="stock_list_sequence"/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

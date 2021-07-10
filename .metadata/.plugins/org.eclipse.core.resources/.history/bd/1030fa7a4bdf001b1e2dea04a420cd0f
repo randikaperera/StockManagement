@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_list_sequence" onError="stock_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <call-template target="logger_template">
+        <with-param name="logLevel" value="INFO"/>
+        <with-param name="logSequence" value="product_list_sequence"/>
+        <with-param name="logMessage" value="invoke product list sequence"/>
+    </call-template>
+    <log level="custom">
+        <property expression="$url:productIds" name="+++++++++uri.var.q1++++++++++"/>
+    </log>
+    <filter regex="false" source="boolean($url:productIds)">
+        <then>
+            <call-template target="logger_template">
+                <with-param name="logLevel" value="INFO"/>
+                <with-param name="logSequence" value="product_list_sequence"/>
+                <with-param name="logMessage" value="get whole list "/>
+            </call-template>
+            <payloadFactory media-type="xml">
+                <format>
+                    <p:getStock xmlns:p="http://ws.wso2.org/dataservice"/>
+                </format>
+                <args/>
+            </payloadFactory>
+        </then>
+        <else>
+            <call-template target="logger_template">
+                <with-param name="logLevel" value="INFO"/>
+                <with-param name="logSequence" value="product_list_sequence"/>
+                <with-param name="logMessage" value="get specific ids"/>
+            </call-template>
+            <payloadFactory media-type="xml">
+                <format>
+                    <p:getStock xmlns:p="http://ws.wso2.org/dataservice">
+                        <xs:productIds xmlns:xs="http://ws.wso2.org/dataservice">1</xs:productIds>
+                    </p:getStock>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$url:productids"/>
+                </args>
+            </payloadFactory>
+        </else>
+    </filter>
+    <log level="full"/>
+    <property name="SOAPAction" scope="transport" type="STRING" value="urn:getStock"/>
+    <call>
+        <endpoint key="conf:endpoints/product_list_endpoint.xml"/>
+    </call>
+    <log level="full"/>
+    <respond/>
+</sequence>

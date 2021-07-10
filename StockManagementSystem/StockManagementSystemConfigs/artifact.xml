@@ -23,4 +23,10 @@
     <artifact name="stock_management_api_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
         <file>src/main/resources/metadata/stock_management_api_metadata.yaml</file>
     </artifact>
+    <artifact name="stock_file_processor_proxy" groupId="com.example.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/stock_file_processor_proxy.xml</file>
+    </artifact>
+    <artifact name="stock_file_Jms_listener_proxy" groupId="com.example.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/stock_file_Jms_listener_proxy.xml</file>
+    </artifact>
 </artifacts>
