@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property description="set sequence name" name="sequenceName" scope="default" type="STRING" value="stock_error_sequence"/>
+    <call-template target="logger_template">
+        <with-param name="logLevel" value="ERROR"/>
+        <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+        <with-param name="logMessage" value="An error occurred in the mediation flow"/>
+        <with-param name="isLogBody" value="true"/>
+    </call-template>
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="500"/>
+    <payloadFactory media-type="json">
+        <format>{"Error message":"Internal server error occurred in the mediation flow"}</format>
+        <args/>
+    </payloadFactory>
+    <respond/>
+</sequence>

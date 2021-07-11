@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="logger_template" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter defaultValue="" isMandatory="false" name="logLevel"/>
+    <parameter defaultValue="" isMandatory="false" name="logSequence"/>
+    <parameter defaultValue="" isMandatory="false" name="logMessage"/>
+    <sequence>
+        <log level="custom">
+            <property expression="fn:concat('log level ', $func:logLevel)" name="logLevel"/>
+            <property expression="fn:concat('sequence: ', $func:logSequence)" name="logSequenceName"/>
+            <property expression="fn:concat('log message: ', $func:logMessage)" name="logMessage"/>
+        </log>
+    </sequence>
+</template>

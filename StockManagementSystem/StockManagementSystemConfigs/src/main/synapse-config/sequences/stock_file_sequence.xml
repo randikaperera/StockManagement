@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_file_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="get-property('SYSTEM_DATE', 'yyyy-MM-dd')" name="timestamp" scope="default" type="STRING"/>
+    <property expression="fn:concat('file:///Users/randikaperera/Desktop/wso2/stockFiles/source/stock-',$ctx:timestamp,'.txt')" name="sourcePath" scope="default" type="STRING"/>
+    <property name="vfsSourcePath" scope="default" type="STRING" value="file:///Users/randikaperera/Desktop/wso2/stockFiles/in"/>
+    <property name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+    <fileconnector.send>
+        <address>{$ctx:sourcePath}</address>
+    </fileconnector.send>
+    <fileconnector.move>
+        <source>{$ctx:sourcePath}</source>
+        <destination>{$ctx:vfsSourcePath}</destination>
+    </fileconnector.move>
+    <payloadFactory media-type="json">
+        <format>{"success":"true"}</format>
+        <args/>
+    </payloadFactory>
+    <respond/>
+</sequence>

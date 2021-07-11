@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="logger_template" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter defaultValue="" isMandatory="false" name="logLevel"/>
+    <parameter defaultValue="" isMandatory="false" name="logSequence"/>
+    <parameter defaultValue="" isMandatory="false" name="logMessage"/>
+    <parameter defaultValue="" isMandatory="false" name="isLogMessageBody"/>
+    <sequence>
+        <property expression="fn:concat('correlationId: ',$ctx:correlationId,'sequenceName: ',$func:logSequence,'logMessage: ',$func:logMessage)" name="logString" scope="default" type="STRING"/>
+        <filter regex="true" source="$func:isLogMessageBody">
+            <then>
+                <property expression="fn:concat($ctx:logString,'messageBody ',$ctx:body)" name="logString" scope="default" type="STRING"/>
+            </then>
+            <else/>
+        </filter>
+        <switch source="$func:logLevel">
+            <case regex=".*+"/>
+            <default/>
+        </switch>
+        <log level="custom">
+            <property expression="fn:concat('log level ', $func:logLevel)" name="logLevel"/>
+            <property expression="fn:concat('sequence: ', $func:logSequence)" name="logSequenceName"/>
+            <property expression="fn:concat('log message: ', $func:logMessage)" name="logMessage"/>
+        </log>
+    </sequence>
+</template>

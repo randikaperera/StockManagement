@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_set_sequence" onError="stock_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <xslt key="conf:xslts/set_stock_xml_payload.xslt"/>
+    <log level="full"/>
+    <property name="SOAPAction" scope="transport" type="STRING" value="urn:setStock"/>
+    <call>
+        <endpoint key="conf:endpoints/stock_dss_endpoint.xml"/>
+    </call>
+    <respond/>
+</sequence>

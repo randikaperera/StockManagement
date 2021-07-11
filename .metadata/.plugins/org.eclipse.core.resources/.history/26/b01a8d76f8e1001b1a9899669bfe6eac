@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="logger_template" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter defaultValue="" isMandatory="false" name="logLevel"/>
+    <parameter defaultValue="" isMandatory="false" name="logSequence"/>
+    <parameter defaultValue="" isMandatory="false" name="logMessage"/>
+    <sequence>
+        <property expression="fn:concat('correlationId: ',$ctx:correlationId,'sequenceName: ',$func:logSequence,'logMessage: ',$func:logMessage)" name="logString" scope="default" type="STRING"/>
+        <switch source="$func:logLevel">
+            <case regex="INFO|info">
+                <log level="custom">
+                    <property expression="$ctx:logString" name="logEntry"/>
+                </log>
+            </case>
+            <case regex="WARN|warn">
+                <log category="WARN" level="custom">
+                    <property expression="$ctx:logString" name="logEntry"/>
+                </log>
+            </case>
+            <case regex="DEBUG|rebug">
+                <log category="DEBUG" level="custom">
+                    <property expression="fn:concat($ctx:logString,'MessageBody',$body)" name="logEntry"/>
+                </log>
+            </case>
+            <case regex="ERROR|error">
+                <log category="ERROR" level="custom">
+                    <property expression="fn:concat($ctx:logString)" name="logEntry"/>
+                </log>
+            </case>
+            <default>
+                <log level="custom">
+                    <property expression="$ctx:logString" name="logEntry"/>
+                </log>
+            </default>
+        </switch>
+    </sequence>
+</template>

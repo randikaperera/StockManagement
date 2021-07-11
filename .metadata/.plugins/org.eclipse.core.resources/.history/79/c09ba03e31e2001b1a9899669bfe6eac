@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_set_sequence" onError="stock_mediation_error_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property description="set sequence name" name="sequenceName" scope="default" type="STRING" value="stock_set_sequence"/>
+    <call-template target="logger_template">
+        <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+        <with-param name="logMessage" value="initiate mediation flow to set the stock"/>
+    </call-template>
+    <call-template target="logger_template">
+        <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+        <with-param name="logMessage" value="Starting xslt transformationk"/>
+    </call-template>
+    <xslt key="conf:xslts/set_stock_xml_payload.xslt"/>
+    <call-template target="logger_template">
+        <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+        <with-param name="logMessage" value="xslt trasformation is successful"/>
+        <with-param name="isLogBody" value="true"/>
+    </call-template>
+    <property name="SOAPAction" scope="transport" type="STRING" value="urn:setStock"/>
+    <call-template target="logger_template">
+        <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+        <with-param name="logMessage" value="Invoke set stock dss endpoint"/>
+        <with-param name="isLogBody" value="true"/>
+    </call-template>
+    <call>
+        <endpoint key="conf:endpoints/stock_dss_endpoint.xml"/>
+    </call>
+    <filter regex="200" source="$axis2:HTTP_SC">
+        <then>
+            <payloadFactory media-type="json">
+                <format>{"success":"true"}</format>
+                <args/>
+            </payloadFactory>
+        </then>
+        <else/>
+    </filter>
+    <respond/>
+</sequence>

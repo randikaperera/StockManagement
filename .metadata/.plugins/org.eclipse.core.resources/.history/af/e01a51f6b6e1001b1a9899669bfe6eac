@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_file_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full"/>
+    <log>
+        <property expression="base64Decode(//file/text())" name="*******encoded value"/>
+        <property name="JK*********" value="INSIDE VFS******"/>
+    </log>
+    <property name="DISABLE_SMOOKS_RESULT_PAYLOAD" scope="default" type="STRING" value="true"/>
+    <smooks config-key="conf:smooks/stock_file_processor_smooks_config.xml">
+        <input type="text"/>
+        <output type="xml"/>
+    </smooks>
+</sequence>

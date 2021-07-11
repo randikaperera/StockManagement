@@ -6,6 +6,8 @@ xmlns:ftl="http://www.milyn.org/xsd/smooks/freemarker-1.1.xsd">
 <params>
 <param name="stream.filter.type">SAX</param>
 <param name="stream.filter.readerPoolSize">100</param>
+ <param name="inputType">input.csv</param>
+    <param name="input.csv" type="input.type.actived">File:///Users\randikaperera\Desktop\wso2\stockFiles\fail\abc.csv</param>
 </params>
 
 <csv:reader fields="ProductID,Location,Change" separator="," quote="'" />

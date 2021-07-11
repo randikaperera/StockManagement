@@ -5,9 +5,6 @@
     <artifact name="stock_set_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/stock_set_sequence.xml</file>
     </artifact>
-    <artifact name="stock_error_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/stock_error_sequence.xml</file>
-    </artifact>
     <artifact name="stock_list_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/stock_list_sequence.xml</file>
     </artifact>
@@ -28,5 +25,17 @@
     </artifact>
     <artifact name="stock_file_Jms_listener_proxy" groupId="com.example.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/proxy-services/stock_file_Jms_listener_proxy.xml</file>
+    </artifact>
+    <artifact name="stock_file_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_file_sequence.xml</file>
+    </artifact>
+    <artifact name="stock_init_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_init_sequence.xml</file>
+    </artifact>
+    <artifact name="stock_api_error_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_api_error_sequence.xml</file>
+    </artifact>
+    <artifact name="stock_mediation_error_sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/stock_mediation_error_sequence.xml</file>
     </artifact>
 </artifacts>

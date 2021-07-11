@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><resources>
-    <item>
-        <file>list_stock_dss_endpoint.xml</file>
-        <path>/_system/config/endpoints</path>
-        <mediaType>application/vnd.wso2.esb.endpoint</mediaType>
-        <properties/>
-    </item>
-</resources>

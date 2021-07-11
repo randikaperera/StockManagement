@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_init_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property description="set sequence name" name="sequenceName" scope="default" type="STRING" value="stock_init_sequence"/>
+    <property description="Generate correlationId for the request" name="correlationId" scope="default" type="STRING" value="get-property('MessageID')"/>
+</sequence>

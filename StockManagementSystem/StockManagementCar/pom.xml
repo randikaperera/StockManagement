@@ -16,17 +16,19 @@
   <properties>
     <com.yenlo.resource_._stock_file_processor_smooks_config>capp/EnterpriseIntegrator</com.yenlo.resource_._stock_file_processor_smooks_config>
     <com.yenlo.resource_._list_stock_dss_endpoint>capp/EnterpriseIntegrator</com.yenlo.resource_._list_stock_dss_endpoint>
-    <com.example.sequence_._stock_error_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_error_sequence>
     <com.example.metadata_._stock_management_api_metadata>capp/EnterpriseServiceBus</com.example.metadata_._stock_management_api_metadata>
     <com.yenlo.dataservice_._stockManagementDataservice>capp/DataServicesServer</com.yenlo.dataservice_._stockManagementDataservice>
     <com.yenlo.resource_._update_stock_xml_payload>capp/EnterpriseIntegrator</com.yenlo.resource_._update_stock_xml_payload>
+    <com.example.sequence_._stock_init_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_init_sequence>
     <com.example.sequence_._stock_list_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_list_sequence>
+    <com.example.sequence_._stock_file_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_file_sequence>
     <com.yenlo.resource_._stock_dss_endpoint>capp/EnterpriseIntegrator</com.yenlo.resource_._stock_dss_endpoint>
     <com.yenlo.resource_._set_stock_xml_payload>capp/EnterpriseIntegrator</com.yenlo.resource_._set_stock_xml_payload>
     <com.yenlo.resource_._set_stock_dss_endpoint>capp/EnterpriseIntegrator</com.yenlo.resource_._set_stock_dss_endpoint>
     <com.example.template_._logger_template>capp/EnterpriseServiceBus</com.example.template_._logger_template>
     <com.example.sequence_._stock_update_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_update_sequence>
     <com.example.proxy-service_._stock_file_processor_proxy>capp/EnterpriseServiceBus</com.example.proxy-service_._stock_file_processor_proxy>
+    <com.example.sequence_._stock_api_error_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_api_error_sequence>
     <com.yenlo.resource_._product_list_endpoint>capp/EnterpriseIntegrator</com.yenlo.resource_._product_list_endpoint>
     <com.example.api_._stock_management_api>capp/EnterpriseServiceBus</com.example.api_._stock_management_api>
     <com.example.datasource_._stock_management_datasource>capp/DataServicesServer</com.example.datasource_._stock_management_datasource>
@@ -34,6 +36,7 @@
     <com.example.metadata_._stock_management_api_swagger>capp/EnterpriseServiceBus</com.example.metadata_._stock_management_api_swagger>
     <com.example.proxy-service_._stock_file_Jms_listener_proxy>capp/EnterpriseServiceBus</com.example.proxy-service_._stock_file_Jms_listener_proxy>
     <com.yenlo.resource_._list_stock_endpoint>capp/EnterpriseIntegrator</com.yenlo.resource_._list_stock_endpoint>
+    <com.example.sequence_._stock_mediation_error_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_mediation_error_sequence>
     <com.example.sequence_._stock_set_sequence>capp/EnterpriseServiceBus</com.example.sequence_._stock_set_sequence>
   </properties>
   <dependencies>
@@ -129,13 +132,31 @@
     </dependency>
     <dependency>
       <groupId>com.example.sequence</groupId>
-      <artifactId>stock_error_sequence</artifactId>
+      <artifactId>stock_api_error_sequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>stock_file_sequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>stock_init_sequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.example.sequence</groupId>
       <artifactId>stock_list_sequence</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.sequence</groupId>
+      <artifactId>stock_mediation_error_sequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>

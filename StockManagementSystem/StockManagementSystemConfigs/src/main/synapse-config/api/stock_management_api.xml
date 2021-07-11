@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/inventory" name="stock_management_api" xmlns="http://ws.apache.org/ns/synapse">
-    <resource methods="POST" url-mapping="/stockUpdate">
+    <resource faultSequence="stock_api_error_sequence" methods="POST" url-mapping="/stockUpdate">
         <inSequence>
+            <sequence key="stock_init_sequence"/>
             <sequence key="stock_update_sequence"/>
         </inSequence>
         <outSequence/>
-        <faultSequence/>
     </resource>
-    <resource methods="POST" url-mapping="/stockSet">
+    <resource faultSequence="stock_api_error_sequence" methods="POST" url-mapping="/stockSet">
         <inSequence>
+            <sequence key="stock_init_sequence"/>
             <sequence key="stock_set_sequence"/>
         </inSequence>
         <outSequence/>
-        <faultSequence/>
     </resource>
-    <resource methods="GET" url-mapping="/stockList">
+    <resource faultSequence="stock_api_error_sequence" methods="GET" url-mapping="/stockList">
         <inSequence>
+            <sequence key="stock_init_sequence"/>
             <sequence key="stock_list_sequence"/>
         </inSequence>
         <outSequence/>
-        <faultSequence/>
+    </resource>
+    <resource faultSequence="stock_api_error_sequence" methods="POST" url-mapping="/fileUpload">
+        <inSequence>
+            <sequence key="stock_init_sequence"/>
+            <sequence key="stock_file_sequence"/>
+        </inSequence>
+        <outSequence/>
     </resource>
 </api>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="stock_init_sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property description="set sequence name" name="sequenceName" scope="default" type="STRING" value="stock_init_sequence"/>
+    <property description="Generate correlationId for the request" expression="get-property('MessageID')" name="correlationId" scope="default" type="STRING"/>
+    <call-template target="logger_template">
+        <with-param name="logSequence" value="{$ctx:sequenceName}"/>
+        <with-param name="logMessage" value="Generate correlationId successfully"/>
+    </call-template>
+</sequence>
